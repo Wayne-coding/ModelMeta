@@ -248,14 +248,6 @@ def run_log_ms(seed_model, mutate_times, num_samples, mr_index, log_path):
             metrics_dict[d_new_name] = [dist_chess,gpu_memory2,cpu_memory2]
             if new_output.shape!=original_outputs.shape:
                 print('new_output.shape!=original_outputs.shape!')
-                
-            
-        
-        
-        
-        
-        
-        
 
         df = pd.DataFrame([(index, v[0], v[1], v[2]) for index, (k, v) in enumerate(metrics_dict.items())],
             columns=['name', 'Distance', 'Gpu_Memory_Used', 'Cpu_Memory_Used'])

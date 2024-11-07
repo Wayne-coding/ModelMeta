@@ -4,26 +4,7 @@ import os
 from itertools import product
 
 
-
-
-
-
 PARAMETER_SPACE = 5
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def extract_edges(model):
     layer_list = model.layers
@@ -68,9 +49,7 @@ def extract_inputs(model):
     existing_inputs: {"layer_class": {"input_dims": [], "dtype": [], "shape": []}}
     layer_dims: {"layer_class": {"input_dims": [], "output_dims": []}}
     """
-    
-    
-    
+
     
     layer_list = model.layers
     existing_inputs = {}
@@ -97,51 +76,6 @@ def extract_inputs(model):
         if shape not in existing_inputs[layer_class]['shape']:
             existing_inputs[layer_class]['shape'].append(shape)
     return existing_inputs, layer_dims
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def union_json(single_json_path, all_json_path):
     """
@@ -369,9 +303,7 @@ class CoverageCalculatornew():
         covered_ndims = self.ndims_coverage()
         covered_dtype = self.dtype_coverage()
         covered_shape = self.shape_coverage()
-        
-        
-        
+  
         
         input_cov = (covered_ndims + covered_dtype + covered_shape) / self.total_input_num
         ndims_cov = covered_ndims / self.total_ndims_num
@@ -402,14 +334,10 @@ class CoverageCalculatornew():
         return input_cov,config_cov,api_cov,op_type_cov,op_num_cov,edge_cov
 
 if __name__ == '__main__':
-    
-    
-    
+  
     folder_path = "./torch_mutated_net/vgg11/2023_12_16_20_45_30/model_json"
     api_config_pool_path = './api_config_pool.json'
     all_json_path = os.path.join(folder_path, "all_layer_info.json")
-    
-    
 
     for file in os.listdir(folder_path):
         if file != 'all_layer_info.json':

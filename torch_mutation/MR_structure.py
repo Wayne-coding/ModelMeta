@@ -11,26 +11,6 @@ device=config.device
 rules_dict = config.rules_dict 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class UOC(nn.Module):
     def __init__(self, op_type,operator_mutation_type,log_dict,i,LOG_FLAG):
         super().__init__()
@@ -75,12 +55,6 @@ class UOC(nn.Module):
                 
                 new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
 
-                print('uoc：选择对其变异的node：', option_node)
-                print('uoc：选择对其变异的node的名字：', option_name)
-                print('uoc：选择对其变异的instance：', option_instance)
-                print('uoc：选择的变异规则：', option_rule)
-                print('uoc：变异后新的层：', new_instance)
-
                 log_dict[i]['deadcode_api_name'] = option_name
                 if option_rule.__name__[-2:] in ('10', '11', '12', '13', '14', '15', '16', '17', '18'):
                     log_dict[i]['deadcode_api_rule'] = option_rule.__name__[-6:]
@@ -101,19 +75,7 @@ class UOC(nn.Module):
             option_rule = match_rule(option_rule_name)
             new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
 
-            print('uoc：选择对其变异的node：', option_node)
-            print('uoc：选择对其变异的node的名字：', option_name)
-            print('uoc：选择对其变异的instance：', option_instance)
-            print('uoc：选择的变异规则：', option_rule)
-            print('uoc：变异后新的层：', new_instance)
-
-        
-        
-
-        
-        new_name = reflect_name(option_name, option_rule)
-
-        
+        new_name = reflect_name(option_name, option_rule)  
         new_module.add_module(new_name, new_instance)
         
         with option_node.graph.inserting_after(option_node):
@@ -203,12 +165,6 @@ class ABSOC_A(nn.Module):
                 option_rule = random.choice(rules_dict[type(option_instance)])  
                 new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
 
-                print('ABSOC_A：选择对其变异的node：', option_node)
-                print('ABSOC_A：选择对其变异的node的名字：', option_name)
-                print('ABSOC_A：选择对其变异的instance：', option_instance)
-                print('ABSOC_A：选择的变异规则：', option_rule)
-                print('ABSOC_A：变异后新的层：', new_instance)
-
                 log_dict[i]['deadcode_api_name'] = option_name
                 if option_rule.__name__[-2:] in ('10', '11', '12', '13', '14', '15', '16', '17', '18'):
                     log_dict[i]['deadcode_api_rule'] = option_rule.__name__[-6:]
@@ -229,16 +185,6 @@ class ABSOC_A(nn.Module):
             option_rule = match_rule(option_rule_name)
             new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
 
-            print('ABSOC_A：选择对其变异的node：', option_node)
-            print('ABSOC_A：选择对其变异的node的名字：', option_name)
-            print('ABSOC_A：选择对其变异的instance：', option_instance)
-            print('ABSOC_A：选择的变异规则：', option_rule)
-            print('ABSOC_A：变异后新的层：', new_instance)
-
-        
-        
-
-        
         new_name = reflect_name(option_name, option_rule)
 
         
@@ -327,12 +273,6 @@ class ABSOC_B(nn.Module):
                 option_rule = random.choice(rules_dict[type(option_instance)])  
                 new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
 
-                print('ABSOC_B：选择对其变异的node：', option_node)
-                print('ABSOC_B：选择对其变异的node的名字：', option_name)
-                print('ABSOC_B：选择对其变异的instance：', option_instance)
-                print('ABSOC_B：选择的变异规则：', option_rule)
-                print('ABSOC_B：变异后新的层：', new_instance)
-
                 log_dict[i]['deadcode_api_name'] = option_name
                 if option_rule.__name__[-2:] in ('10', '11', '12', '13', '14', '15', '16', '17', '18'):
                     log_dict[i]['deadcode_api_rule'] = option_rule.__name__[-6:]
@@ -353,16 +293,6 @@ class ABSOC_B(nn.Module):
             option_rule = match_rule(option_rule_name)
             new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
 
-            print('ABSOC_B：选择对其变异的node：', option_node)
-            print('ABSOC_B：选择对其变异的node的名字：', option_name)
-            print('ABSOC_B：选择对其变异的instance：', option_instance)
-            print('ABSOC_B：选择的变异规则：', option_rule)
-            print('ABSOC_B：变异后新的层：', new_instance)
-
-        
-        
-
-        
         new_name = reflect_name(option_name, option_rule)
 
         
@@ -375,8 +305,6 @@ class ABSOC_B(nn.Module):
         
         graph.lint()
         new_module.recompile()
-        
-
         return new_module
 
     def forward(self, a, b, deada, deadb):
@@ -387,15 +315,9 @@ class ABSOC_B(nn.Module):
             print("type deada", type(deada))
             print("type deadb", type(deadb))
             return a, b, deada, deadb
-        
-        
-        
-        
-        
-        
+
         a, b = handle_shape_strict(a, b)
-        
-        
+   
         a1 = torch.abs(a)
         b1 = torch.abs(b)
         a1b1 = torch.sub(a1, b1)  
@@ -417,7 +339,6 @@ class ABSOC_B(nn.Module):
         out = out.to(dtype)
         
         return out
-
 
 class PIOC(nn.Module):
     def __init__(self, op_type, operator_mutation_type, log_dict, i, LOG_FLAG):
@@ -462,12 +383,6 @@ class PIOC(nn.Module):
                 option_rule = random.choice(rules_dict[type(option_instance)])  
                 new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
 
-                print('PIOC：选择对其变异的node：', option_node)
-                print('PIOC：选择对其变异的node的名字：', option_name)
-                print('PIOC：选择对其变异的instance：', option_instance)
-                print('PIOC：选择的变异规则：', option_rule)
-                print('PIOC：变异后新的层：', new_instance)
-
                 log_dict[i]['deadcode_api_name'] = option_name
                 if option_rule.__name__[-2:] in ('10', '11', '12', '13', '14', '15', '16', '17', '18'):
                     log_dict[i]['deadcode_api_rule'] = option_rule.__name__[-6:]
@@ -487,20 +402,7 @@ class PIOC(nn.Module):
 
             option_rule = match_rule(option_rule_name)
             new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
-
-            print('PIOC：选择对其变异的node：', option_node)
-            print('PIOC：选择对其变异的node的名字：', option_name)
-            print('PIOC：选择对其变异的instance：', option_instance)
-            print('PIOC：选择的变异规则：', option_rule)
-            print('PIOC：变异后新的层：', new_instance)
-
-        
-        
-
-        
-        new_name = reflect_name(option_name, option_rule)
-
-        
+        new_name = reflect_name(option_name, option_rule) 
         new_module.add_module(new_name, new_instance)
         
         with option_node.graph.inserting_after(option_node):
@@ -543,7 +445,7 @@ class PIOC(nn.Module):
         out = torch.add(mul_edge_1, final_dead_1)
         pioc_equal = np.allclose(out.detach().cpu().numpy(), final_dead_1.detach().cpu().numpy())
         if not pioc_equal:
-            print("pioc不相等！")
+
         assert pioc_equal
         
         

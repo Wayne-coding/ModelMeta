@@ -398,10 +398,6 @@ def run_mcmc_ms(seed_model, mutate_times,num_samples):
                 
                 formatted_data = O[d_new_name]
                 
-        
-        
-        
-        
 
         selected_MR_structure.delta_bigger_than_zero = selected_MR_structure.delta_bigger_than_zero + 1 \
             if (reward - last_reward) > 0 else selected_MR_structure.delta_bigger_than_zero

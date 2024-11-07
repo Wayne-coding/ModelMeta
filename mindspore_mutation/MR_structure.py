@@ -12,7 +12,6 @@ from mindspore.rewrite.node import NodeManager
 from mindspore.rewrite import ScopedValue, NodeType
 from mindspore.rewrite import SymbolTree
 
-
 banned_ops = [mindspore.ops.operations.array_ops.Shape,
               mindspore.ops.operations.array_ops.Concat,
               mindspore.ops.operations.array_ops.TupleToArray,
@@ -26,30 +25,6 @@ banned_trees = [mindspore.ops.ResizeBilinear,
                 type(None)
                 ]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def has_child_node(net, node_name):
     layers = net.cells_and_names()
     parent_node = None
@@ -60,17 +35,6 @@ def has_child_node(net, node_name):
         if parent_node is not None and name.startswith(parent_node + '.'):
             return True
     return False
-
-
-
-
-
-
-
-
-
-            
-
 
 rules_dict = config.rules_dict 
 class UOC(nn.Cell):
@@ -177,12 +141,7 @@ class UOC(nn.Cell):
         uoc = ops.add(a2, b2)
         
         uoc = ops.add(uoc, ab2)
-        
-        
-        
-        
-        
-        
+            
         uoc = ops.add(uoc, 1e-10)
         
         uoc = ops.neg(uoc)
@@ -194,19 +153,9 @@ class UOC(nn.Cell):
         uoc, add_edge = handle_shape_strict(uoc, add_edge)
         
         out = ops.mul(uoc, add_edge)
-        dtype = deadb.dtype
-        
+        dtype = deadb.dtype1
         out, deadb = handle_shape_final(out, deadb)
-        
-        
-        
         out = ops.add(out, deadb)
-        
-        
-        
-        
-        
-        
         out = out.to(dtype)
         return out
 
@@ -320,17 +269,9 @@ class PIOC(nn.Cell):
         else:
             raise NotImplementedError("optype Not Implemented for optype: {}".format(self.op_type))
 
-        
-        
-        
-        
-        mul_edge_1, final_dead_1 = handle_shape_final(mul_edge, final_dead)
-        
-        
-        out = ops.Add()(mul_edge_1, final_dead_1)
-        
+        mul_edge_1, final_dead_1 = handle_shape_final(mul_edge, final_dead             
+        out = ops.Add()(mul_edge_1, final_dead_1)        
         return out
-
 
 class ABSOC_A(nn.Cell):
     def __init__(self, op_type,operator_mutation_type,log_dict,i,LOG_FLAG):
@@ -422,15 +363,9 @@ class ABSOC_A(nn.Cell):
             print("type deada", type(deada))
             print("type deadb", type(deadb))
             return a, b, deada, deadb
-        
-        
-        
-        
-        
-        
+ 
         a, b = handle_shape_strict(a, b)
-        
-        
+
         a1 = mindspore.ops.abs(a)
         b1 = mindspore.ops.abs(b)
         a1b1 = mindspore.ops.add(a1, b1)  
@@ -452,7 +387,6 @@ class ABSOC_A(nn.Cell):
         out = out.to(dtype)
         
         return out
-
 
 class ABSOC_B(nn.Cell):
     def __init__(self, op_type,operator_mutation_type,log_dict,i,LOG_FLAG):

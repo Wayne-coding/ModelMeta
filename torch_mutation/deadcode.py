@@ -106,14 +106,12 @@ class DenseLayer(nn.Module):
         dtype = x.dtype
         x = x.to(torch.float32)
 
-        
         running_mean, running_var = create_batch_norm_params(x.shape[1], x.device)
         new_features = F.batch_norm(x, running_mean=running_mean,
                                     running_var=running_var,
                                     weight=None, bias=None, training=False)
         new_features = self.relu(new_features)
-
-        
+   
         feature_weight = create_feature_weight(new_features.shape, new_features.device)
         new_features = F.conv2d(new_features, weight=feature_weight, stride=1, padding=0)
 
@@ -123,23 +121,16 @@ class DenseLayer(nn.Module):
                                     running_var=running_var,
                                     weight=None, bias=None, training=False)
         new_features = self.relu_1(new_features)
-
-        
+ 
         feature_weight_1 = create_feature_weight(new_features.shape, new_features.device)
         new_features = F.conv2d(new_features, weight=feature_weight_1, stride=1, padding=0)
 
-        
         if self.drop_rate > 0:
             new_features = F.dropout(new_features, p=self.drop_rate, training=False)
 
-        
         x = x.to(dtype)
         new_features = new_features.to(dtype)
         return torch.cat([x, new_features], dim=1)
-
-
-
-
 
 @torch.fx.wrap
 def create_feature_weight(shape, device):
@@ -173,7 +164,6 @@ class BasicConv2d(nn.Module):
         x = x.to(dtype)
         return x
 
-
 class Inception_A(nn.Module):
     def __init__(self):
         super(Inception_A, self).__init__()
@@ -201,8 +191,6 @@ class Inception_A(nn.Module):
         out = torch.cat((x0, x1, x2, branch_pool), dim=1)
         out = out.to(dtype)
         return out
-
-
 
 
 @torch.fx.wrap
@@ -254,8 +242,6 @@ class PWDWPW_ResidualBlock(nn.Module):
         out2 = self.PDP_ResidualBlock(out2)
         out = torch.add(out2, identity)
         return out
-
-
 
 
 @torch.fx.wrap
@@ -321,8 +307,6 @@ class ResidualBlock(nn.Module):
         return out
 
 
-
-
 @torch.fx.wrap
 def create_random_tensor_(shape, keep_prob, device):
     random_tensor = keep_prob + torch.rand(shape, dtype=torch.float32, device=device)
@@ -343,23 +327,18 @@ class DropPath(nn.Module):
         if self.training and self.drop_prob > 0.:
             keep_prob = 1. - self.drop_prob
             shape = (x.shape[0],) + (1,) * (x.ndim - 1)  
-
-            
+         
             random_tensor = create_random_tensor_(shape, keep_prob, x.device)
-
-            
+      
             output = x.div(keep_prob) * random_tensor
             output = output.to(dtype)
             return output
         return x
 
 
-
-
 @torch.fx.wrap
 def create_random_tensor(shape, device, dtype):
     return torch.randn(shape, dtype=dtype, device=device)
-
 
 class Dense(nn.Module):
     def __init__(self):
@@ -369,8 +348,7 @@ class Dense(nn.Module):
         dtype = deada.dtype
         feature_a = deada.shape[-2]
         feature_b = deada.shape[-1]
-
-        
+   
         for_matmul_edge = create_random_tensor((feature_a, feature_b), deada.device, torch.float32)
         matmul_edge = torch.mul(deada, for_matmul_edge)
 

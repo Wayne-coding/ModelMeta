@@ -55,18 +55,11 @@ def run_random_torch(seed_model, mutate_times,num_samples):
         print('-----------------------total_Mutate_time:%d start!-----------------------' % n)
         log_dict[n] = {}
         log_dict[n]['d_name'] = select_d_name
-
-        
         selected_deadcode_name=random.choice(deadcode_name_list)
-
-        
         selected_MR_structure_name = random.choice(MR_structure_name_list)
         MR_structure_selected_nums[selected_MR_structure_name] += 1
-
-        
         d_new_name = "{}-{}{}".format(seed_model, selected_MR_structure_name,MR_structure_selected_nums[selected_MR_structure_name])
-
-        
+  
         if selected_deadcode_name in ('DropPath', 'Dense') and seed_model_api_times<max_seed_model_api_times(seed_model):  
             api_mutation_type = 'seed_model'
             seed_model_api_times+=1
@@ -149,11 +142,6 @@ def run_random_torch(seed_model, mutate_times,num_samples):
                 print('new_outputs.shape!=original_outputs.shape!')
                 sys.exit('new_outputs.shape!=original_outputs.shape!')
 
-            
-            
-            
-
-            
             if ('state' in log_dict[n]) and ("Success" not in log_dict[n]['state']):  
                 
                 d_probs = torch.distributions.Beta(torch.tensor([value[0] for value in R.values()]), torch.ones(len(R))).sample()
@@ -174,8 +162,7 @@ def run_random_torch(seed_model, mutate_times,num_samples):
                 d = copy.deepcopy(d)  
                 select_d_name=d_new_name
         
-
-        
+ 
         log_dict[n]['select_deadcode'] = selected_deadcode_name
         log_dict[n]['selected_MR_structure'] = selected_MR_structure_name
         log_dict[n]['subs_place'], log_dict[n]['dep_places'] = subs_place, dep_places

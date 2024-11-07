@@ -48,20 +48,6 @@ def torch_model2json(model, input_tensor, input_dtypes):
             col_names=['input_size', 'output_size', 'name'], depth=8,
             verbose=1)
 
-        
-        
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
-
         model_json = {}
         edge_list_list = []
         cur_edge_num = 0
@@ -163,22 +149,15 @@ def model2cov(model,input,dtype,d_file_path,api_config_pool_path):
     os.makedirs(os.path.dirname(d_file_path), exist_ok=True)
     with open(d_file_path, 'w', encoding='utf-8') as file:
         json.dump(model_json_1, file,cls=CustomEncoder, ensure_ascii=False, indent=4)
-        
-
-    
+ 
     cal_cov = CoverageCalculatornew(api_config_pool_path)
     cal_cov.load_json(d_file_path)
     input_cov,config_cov,api_cov= cal_cov.cal_coverage()
 
-    
-    
     del model_json_1,model, input, dtype,cal_cov
     
     gc.collect()
     return input_cov,config_cov,api_cov
-
-
-
 
 
 import torch.nn as nn
@@ -232,7 +211,6 @@ if __name__ == '__main__':
         net = vgg11()
         a = torch.randn(5, 3, 32, 32)
         d=fx.symbolic_trace(net)
-        
 
         print('1111111111111111111111')
         model_json_1 = torch_model2json(d, a, [torch.float32])  
@@ -258,7 +236,6 @@ if __name__ == '__main__':
             dd = nodelist[22]
             print(aa,bb,cc,dd) 
 
-
             if selected_MR_structure_name == "PIOC":
                 with cc.graph.inserting_after(cc):
                     new_hybrid_node = cc.graph.call_function(add_module, args=(cc, cc, cc))
@@ -281,6 +258,3 @@ if __name__ == '__main__':
         print(d)
         model_json_1 = torch_model2json(d, a, [torch.float32])  
         print('2222222222222222')
-        
-        
-

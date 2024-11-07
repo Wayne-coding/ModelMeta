@@ -254,11 +254,7 @@ def run_random_ms(seed_model, mutate_times,num_samples):
                 position = tree.after(cc)  
                 next_node = cc.get_users()[0]  
                 
-                
-                
-                
-                
-                    
+   
                 if len(next_node.get_args()) > 1:
                     for idx, arg in enumerate(next_node.get_args()):
                         if arg == cc.get_targets()[0]:
@@ -283,10 +279,7 @@ def run_random_ms(seed_model, mutate_times,num_samples):
                 position = tree.after(dd)
                 next_node = dd.get_users()[0]
                 
-                
-                
-                
-                
+  
                     
                 if len(next_node.get_args()) > 1:
                     for idx, arg in enumerate(next_node.get_args()):
@@ -324,27 +317,18 @@ def run_random_ms(seed_model, mutate_times,num_samples):
             
             N[d_new_name] = new_net  
             new_outputs = new_net(data_selected) 
-            
-            
-            
             new_output = handle_format(new_outputs)
-            
-            
-            
+
             O[d_new_name] = copy.deepcopy(new_output)
             print('ChebyshevDistance:',metrics.ChebyshevDistance(original_outputs,new_output),';  MAEDistance:',metrics.MAEDistance(original_outputs,new_output))
             dist_chess = metrics.ChebyshevDistance(original_outputs,new_output)
             if new_output.shape!=original_outputs.shape:
                 print('new_output.shape!=original_outputs.shape!')
                 
-
-
         except Exception as e:
             print(e)
             log_dict[n]['state'] = f"Failed: Error during mutation: {str(e)}"
 
-       
-        
         with torch.no_grad():
             if ('state' in log_dict[n]) and ("Success" not in log_dict[n]['state']):  
                 
@@ -358,9 +342,7 @@ def run_random_ms(seed_model, mutate_times,num_samples):
                 
                 metrics_dict[d_new_name]=["None"]*4
                 next_output = O[select_d_name]
-                
-                
-                
+
                 
                 formatted_data = O[select_d_name]
                 

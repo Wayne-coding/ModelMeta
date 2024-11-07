@@ -345,8 +345,7 @@ def handle_format(outputs):
         print(type(outputs[0][0]))
         ans = mindspore.numpy.zeros(outputs[0][0].shape, mindspore.float32)
         for out in outputs:
-            
-            
+
             temp = handle_format(out)
             
             ans, tmp = handle_shape_strict(ans, temp)
@@ -359,8 +358,7 @@ def handle_format(outputs):
         big_length = len(outputs)
         ans = mindspore.numpy.zeros(outputs[0][0].shape, mindspore.float32)
         for out in outputs[0]:
-            
-            
+
             temp = handle_format(out)
             
             ans, tmp = handle_shape_strict(ans, temp)

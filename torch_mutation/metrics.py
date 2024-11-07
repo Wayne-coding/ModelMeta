@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def MAEDistance(x, y):
     x = x.detach().cpu().numpy()
     y = y.detach().cpu().numpy()

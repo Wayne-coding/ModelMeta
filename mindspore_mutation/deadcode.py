@@ -100,7 +100,6 @@ class SELayer(nn.Cell):
         return out
 
 
-
 class DenseLayer(nn.Cell):
     def __init__(self):
         super(DenseLayer, self).__init__()
@@ -129,10 +128,6 @@ class DenseLayer(nn.Cell):
         new_features = ops.cast(new_features, dtype)
         x = ops.cast(x, dtype)
         return ops.Concat(1)([x, new_features])
-
-
-
-
 
 
 class BasicConv2d(nn.Cell):
@@ -183,11 +178,6 @@ class Inception_A(nn.Cell):
         return out
 
 
-
-
-
-
-
 class dwpw_basic(nn.Cell):
     def __init__(self, in_channel, out_channel, kernel_size, stride, depthwise, activation='relu6'):
         super(dwpw_basic, self).__init__()
@@ -204,15 +194,11 @@ class dwpw_basic(nn.Cell):
         x = ops.cast(x, mindspore.float32)
         x = self.dwpw_conv(x)
         
-
-        
         
         x = ops.batch_norm(x, running_mean=mindspore.numpy.randn(x.shape[1]),
                            running_var=mindspore.numpy.randn(x.shape[1]), momentum=0.9, eps=1e-5,
                            weight=mindspore.numpy.randn(x.shape[1]),
                            bias=mindspore.numpy.randn(x.shape[1]))
-        
-
         x = self.dwpw_activation(x)
         x = ops.cast(x, dtype)
         
@@ -248,11 +234,6 @@ class PWDWPW_ResidualBlock(nn.Cell):
         out2 = self.PDP_ResidualBlock_3(out2)
         out = self.add(out2, identity)
         return out
-
-
-
-
-
 
 
 def _conv3x3(in_channel, out_channel, stride=1, use_se=False, res_base=False):
@@ -412,11 +393,6 @@ class ResidualBlock(nn.Cell):
         out = ops.cast(out, dtype)
         return out
 
-
-
-
-
-
 class DropPath(nn.Cell):
     """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
     """
@@ -440,10 +416,6 @@ class DropPath(nn.Cell):
         return x
 
 
-
-
-
-
 class op_mul(nn.Cell):
     def __init__(self):
         super(op_mul, self).__init__()
@@ -464,11 +436,6 @@ class Dense(nn.Cell):
         for_add_edge = mindspore.numpy.randn(feature_a, feature_b)
         add_edge = ops.Add()(matmul_edge, for_add_edge)
         return add_edge
-
-
-
-
-
 
 banned_ops = [mindspore.ops.operations.array_ops.Shape,
               mindspore.ops.operations.array_ops.Concat,

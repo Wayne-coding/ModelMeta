@@ -161,8 +161,6 @@ def run_log_torch(seed_model, mutate_times,log_path, num_samples,data_x_path,dat
                 d_new_name=log_dict[str(n)]['d_new_name']
                 d = copy.deepcopy(D[log_dict[str(n)]['select_d_name']])  
                 metrics_dict[d_new_name] = ['None']*5
-
-
         
         df = pd.DataFrame([(k, v[0], v[1], v[2], v[3],v[4]) for k, v in metrics_dict.items()],
             columns=['New_Model_Name', 'MAE_Distance', 'Time', 'Gpu_Memory_Used', 'Cpu_Memory_Used','Loss'])
@@ -175,10 +173,4 @@ def run_log_torch(seed_model, mutate_times,log_path, num_samples,data_x_path,dat
     os.makedirs(os.path.dirname(dict_save_path), exist_ok=True)
     with open(dict_save_path, 'w', encoding='utf-8') as file:
         json.dump(log_dict, file, ensure_ascii=False, indent=4)
-
-
-
-
-
-
 

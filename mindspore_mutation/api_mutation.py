@@ -40,10 +40,7 @@ def api_mutation(net, option_layers, option_index, log_dict, n, LOG_FLAG):
         
         random_index = random.choice(available_indices)
         
-        
-        
-        
-        
+ 
         option_name, option_instance, option_instance_type, option_node_type = option_layers[random_index]
         
         
@@ -51,21 +48,7 @@ def api_mutation(net, option_layers, option_index, log_dict, n, LOG_FLAG):
         option_rule = random.choice(rules_dict[type(option_instance)])  
         
         new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
-        
-        
-        
-        
-        
 
-        
-        
-        
-        
-
-        
-        
-        
-        
 
         log_dict[n]['seedmodel_api_name'] = option_name
         if option_rule.__name__[-2:] in ('10', '11', '12', '13', '14', '15', '16', '17', '18'):
@@ -96,13 +79,7 @@ def api_mutation(net, option_layers, option_index, log_dict, n, LOG_FLAG):
             if name == option_name and i not in option_index:
                 option_index.append(i)
                 break
-    
-    
-    
+
     
     return net, SymbolTree.create(net), log_dict, option_index
-
-
-
-
 

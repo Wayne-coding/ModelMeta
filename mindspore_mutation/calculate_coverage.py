@@ -54,23 +54,4 @@ def find_layer_type(new_net):
                     layer_type_list.append(j.__class__.__name__)
     return layer_type_list
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #     return input_cov,config_cov,api_cov

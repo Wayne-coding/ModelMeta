@@ -54,8 +54,6 @@ def union_json(single_json_path, all_json_path):
                     
                     all_layer_info['layer_input_info'][layer_class][attr] = list(set(hashable_layer_input_info).union(set(hashable_all_layer_info)))
 
-                    
-                    
 
     if 'layer_dims' not in all_layer_info.keys():
         all_layer_info['layer_dims'] = {}
@@ -99,9 +97,6 @@ if __name__ == '__main__':
     
     all_json_path = "./ms_data/log/random/data_all_random.json"
     
-    
-    
-    
 
     folder_path = './ms_data/log/random'
     for root, dirs, files in os.walk(folder_path):
@@ -112,13 +107,5 @@ if __name__ == '__main__':
                     union_json(file_path, all_json_path)
                 except Exception as e:
                     print(file_path)
-    
-    
-    
 
-    
-    
-    
-    
-    
     #         print(i) 

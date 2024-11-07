@@ -282,34 +282,3 @@ def handle_format(outputs):
         raise NotImplementedError("handle_tuple not implemented for type: ", type(outputs[0]))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

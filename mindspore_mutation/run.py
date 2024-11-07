@@ -8,5 +8,3 @@ for i in range(1, 7):
     mutate_SemTest = f"/root/miniconda3/envs/czx/bin/python /data1/czx/SemTest_master/mindspore_mutation/main_ms{str(i)}.py"
     print(mutate_SemTest)
     os.system(mutate_SemTest)
-
-

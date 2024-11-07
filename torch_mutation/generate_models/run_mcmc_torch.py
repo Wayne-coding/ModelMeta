@@ -156,10 +156,6 @@ def run_mcmc_torch(seed_model, mutate_times,num_samples):
                 sys.exit('new_outputs.shape!=original_outputs.shape!')
 
             
-            
-            
-
-            
             if ('state' in log_dict[n]) and ("Success" not in log_dict[n]['state']):  
                 reward=-1
                 

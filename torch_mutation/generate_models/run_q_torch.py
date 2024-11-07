@@ -30,7 +30,6 @@ def run_q_torch(seed_model, mutate_times,num_samples):
     localtime = time.strftime('%Y_%m_%d_%H_%M_%S', time.localtime())
     log_dict = {}
 
-    
     data = np.load(datasets_path_cargo[seed_model])
     samples = np.random.choice(data.shape[0], num_samples, replace=False)
     samples_data = data[samples] 
@@ -46,7 +45,6 @@ def run_q_torch(seed_model, mutate_times,num_samples):
     with torch.no_grad():
         original_outputs = handle_format(d(data_selected))[0]
 
-    
     n_actions = 4  
     state_dim = 1 
     for i in original_outputs.shape:
@@ -72,7 +70,6 @@ def run_q_torch(seed_model, mutate_times,num_samples):
     seed_model_api_times=0 
     d = copy.deepcopy(d)
 
-    
     for n in range(mutate_times):
         print('-----------------------total_Mutate_time:%d start!-----------------------' % n)
         start_time=time.time()
@@ -111,7 +108,6 @@ def run_q_torch(seed_model, mutate_times,num_samples):
                 api_mutation_type = 'None'
                 log_dict[n]['state'] = "Success:But no APIs available for mutation, so no API-level mutation was performed."
             
-
             with torch.no_grad():
                 graph = d.graph
                 nodelist = []
@@ -168,10 +164,6 @@ def run_q_torch(seed_model, mutate_times,num_samples):
                 if new_outputs.shape!=original_outputs.shape:
                     sys.exit('new_outputs.shape!=original_outputs.shape!')
 
-                
-                
-                
-
         except Exception as e:
             log_dict[n]['state'] = f"Failed: Error during mutation: {str(e)}"
 
@@ -198,18 +190,12 @@ def run_q_torch(seed_model, mutate_times,num_samples):
                 select_d_name=d_new_name
         
 
-        
-        
         formatted_data = handle_format(D[old_d_name](data_selected))[0].unsqueeze(0)
         quantum_q_value = Quantum_Q(formatted_data)
         Quantum_Q_value = quantum_q_value[0, selected_MR_structure_idx].unsqueeze(0)
         with torch.no_grad():
             next_q_value = Target_Q(handle_format(d(data_selected))[0].unsqueeze(0)).max(1)[0]
         Target_Q_value = reward + gamma * next_q_value * (1 - done)
-
-        
-        
-        
 
         loss = criterion(Target_Q_value, Quantum_Q_value) 
         optimizer.zero_grad()
@@ -228,8 +214,6 @@ def run_q_torch(seed_model, mutate_times,num_samples):
         gc.collect()
         torch.cuda.empty_cache()
 
-
-        
         if ('state' in log_dict[n]) and ("Success" not in log_dict[n]['state']):  
             log_dict[n]['select_d_name'] = select_d_name
         else:

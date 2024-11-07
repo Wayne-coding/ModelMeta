@@ -366,63 +366,6 @@ def run_q_ms(seed_model, mutate_times, num_samples, mr_index):
                     log_dict[n]['state'] = f"Failed: api_mutation failed: {str(e)}"
 
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-
-            
-            
-            
-            
-                
-            
-            
-            
-            
-            
-            
-            
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             print('ChebyshevDistance:',metrics.ChebyshevDistance(original_outputs,new_output),';  MAEDistance:',metrics.MAEDistance(original_outputs,new_output))
             dist_chess = metrics.ChebyshevDistance(original_outputs,new_output)
             gpu_memory2, cpu_memory2 = compute_gpu_cpu()
@@ -490,10 +433,7 @@ def run_q_ms(seed_model, mutate_times, num_samples, mr_index):
                 
                 formatted_data = O[d_new_name]
                 
-        
-        
-        
-        
+
 
         formatted_data_torch =torch.from_numpy(formatted_data.asnumpy()).to(pt_device)
         quantum_q_value = Quantum_Q(formatted_data_torch)
@@ -545,9 +485,6 @@ def run_q_ms(seed_model, mutate_times, num_samples, mr_index):
         save_path = os.path.join("results", seed_model, str(localtime),"METRICS_RESULTS_" + str(ms_device).replace(':', '_') + ".xlsx")
         df.to_excel(save_path, index=False)
 
-
-
-
         print('state',log_dict[n]['state'])
 
         print('-----------------------total_Mutate_time:%d ended!-----------------------' % n)
@@ -578,28 +515,7 @@ def run_q_ms(seed_model, mutate_times, num_samples, mr_index):
         for node in new_net.cells_and_names():
             if node[0]:
                 list111.append(node[0])
-        
-        
-
-        
-        
-        
-        
-            
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-        
-        
-        
-        
+ 
         
         with open('/data1/czx/SemTest_master/mindspore_mutation/results/example.txt', 'a', encoding='utf-8') as file:
             

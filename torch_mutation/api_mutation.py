@@ -21,20 +21,11 @@ def api_mutation(d,log_dict,n,LOG_FLAG):
                 module_name = node.target
                 module_instance = d.get_submodule(module_name)  
                 option_layers.append((node, module_instance, node.name))
-        
-        
-
         if len(option_layers) != 0:
             option_node, option_instance, option_name = random.choice(
                 option_layers)  
             option_rule = random.choice(rules_dict[type(option_instance)])  
             new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
-
-            print('选择对其变异的node：', option_node)
-            print('选择对其变异的node的名字：', option_name)
-            print('选择对其变异的instance：', option_instance)
-            print('选择的变异规则：', option_rule)
-            print('变异后新的层：', new_instance)
 
             log_dict[n]['seedmodel_api_name'] = option_name
             if option_rule.__name__[-2:] in ('10', '11', '12', '13', '14', '15', '16', '17', '18'):
@@ -55,17 +46,6 @@ def api_mutation(d,log_dict,n,LOG_FLAG):
 
         option_rule = match_rule(option_rule_name)
         new_instance = rule_reflect_class(option_rule,option_instance)(option_instance)  
-
-        print('选择对其变异的node：', option_node)
-        print('选择对其变异的node的名字：', option_name)
-        print('选择对其变异的instance：', option_instance)
-        print('选择的变异规则：', option_rule)
-        print('变异后新的层：', new_instance)
-
-    
-    
-
-    
     new_name = reflect_name(option_name, option_rule)
 
     
@@ -78,6 +58,4 @@ def api_mutation(d,log_dict,n,LOG_FLAG):
     
     graph.lint()
     d.recompile()
-
-
 

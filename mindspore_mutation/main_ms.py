@@ -10,10 +10,6 @@ from mindspore_mutation.generate_models.run_q_ms import run_q_ms
 import time
 import argparse
 
-
-
-
-
 import sys
 from mindspore_mutation.cargo import net_cargo
 import mindspore
@@ -31,8 +27,6 @@ class Logger(object):
     def flush(self):
         self.terminal.flush()
         self.log.flush()
-
-
 
 if __name__ == '__main__':
 
@@ -66,61 +60,3 @@ if __name__ == '__main__':
     eend = time.time()
     print('~~~~~~~~~~~~~~~~~~~~~~~~')
     print(eend-sstart)
-
-
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-
-
-
-    

@@ -11,29 +11,17 @@ import scipy.io as scio
 import torch.fx as fx
 import psutil
 
-
-
 from models.vgg16.vgg16_torch import vgg16 
-from models.resnet50.resnet50_torch import resnet50 
-
-
+from models.resnet50.resnet50_torch import resnet50
 from models.openpose.main_parallel_torch import OpenPoseNet as OpenPoseNet_torch 
 from models.openpose.src.model_utils.config import config as openpose_config 
 from models.SSD.backbone_resnet50_fpn_pytorch import ssd_resnet50fpn_torch 
 from models.SSD.backbone_mobilenetv1_pytorch import SSDWithMobileNetV1 
-
 from models.UNet.main_torch import UNetMedical_torch 
-
-
 from models.textcnn.textcnn_torch import TextCNN 
-
-
 from models.PatchCore.model_torch import wide_resnet50_2 as PatchCore 
 from models.ssimae.src.network_torch import AutoEncoder as AutoEncoder_torch 
 from models.ssimae.model_utils.config import config as ssimae_cfg  
-
-
-
 
 
 datasets_path_cargo = {
@@ -74,14 +62,7 @@ def get_model(model_name, device):
         model = net_cargo[model_name](ssimae_cfg)
         return model
 
-
-
 if __name__ == '__main__':
-    
-    
-    
-    
-
     model_name = "CRNN"
     model=get_model(model_name,"cpu")
     print(model)
@@ -100,25 +81,6 @@ if __name__ == '__main__':
     print(option_layers)
     print(len(option_layers))
     print(nn_types)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def get_loss(loss_name):
@@ -327,16 +289,6 @@ def select_places(sequence, k):
             return subs_place, chosen
     print("Cannot find suitable places")
     return None, None
-
-
-
-
-
-
-
-
-
-
 
 np.random.seed(20200501)
 class MCMC:

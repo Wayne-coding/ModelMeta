@@ -66,8 +66,3 @@ def union_json(single_json_path, all_json_path):
 
     with open(all_json_path, 'w') as json_file:
         json.dump(all_layer_info, json_file, indent=4)
-
-if __name__ == '__main__':
-    single_json_path = r"F:\NEW\比赛\项目\MR2023-master\torch_mutated_net\YOLOV3DarkNet53\2023_12_13_21_52_05\model_json\model_0.json"
-    all_json_path = r"F:\NEW\比赛\项目\MR2023-master\torch_mutated_net\YOLOV3DarkNet53\2023_12_13_21_52_05\model_json\model_8.json"
-    union_json(single_json_path,all_json_path)

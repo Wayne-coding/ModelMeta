@@ -59,10 +59,7 @@ def extract_inputs(model):
     existing_inputs: {"layer_class": {"input_dims": [], "dtype": [], "shape": []}}
     layer_dims: {"layer_class": {"input_dims": [], "output_dims": []}}
     """
-    
-    
-    
-    
+  
     layer_list = model.layers
     existing_inputs = {}
     layer_dims = {}
@@ -331,16 +328,10 @@ class CoverageCalculatornew():
         api_cov=self.api_pair_coverage() 
         return input_cov,config_cov,api_cov
 
-if __name__ == '__main__':
-    
-    
-    
+if __name__ == '__main__': 
     folder_path = "./torch_mutated_net/vgg11/2023_12_16_20_45_30/model_json"
     api_config_pool_path = './api_config_pool.json'
     all_json_path = os.path.join(folder_path, "all_layer_info.json")
-    
-    
-
     for file in os.listdir(folder_path):
         if file != 'all_layer_info.json':
             file_path = os.path.join(folder_path, file)

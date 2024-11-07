@@ -57,15 +57,6 @@ net_cargo = {
     "TextCNN": TextCNN,
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 
@@ -96,10 +87,6 @@ def get_model(model_name):
 
 if __name__ == '__main__':
     
-    
-    
-    
-
     model_name = "CRNN"
     model=get_model(model_name,"cpu")
     print(model)
@@ -119,29 +106,11 @@ if __name__ == '__main__':
     print(len(option_layers))
     print(nn_types)
 
-
-
 def get_loss(loss_name):
     loss = {}
     loss['CrossEntropy'] = [mindspore.nn.CrossEntropyLoss, torch.nn.CrossEntropyLoss]
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     return loss[loss_name]
-
-
-
-
 
 
 def max_seed_model_api_times(model_name):
@@ -331,29 +300,6 @@ def select_places(sequence, k):
     return None, None
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 np.random.seed(20200501)
 class MCMC:
     class Mutator:
@@ -455,7 +401,6 @@ banned_trees = [mindspore.ops.ResizeBilinear,
                 mindspore.ops.operations.Shape,
                 type(None)
                 ]
-
 
 
 def scan_node(stree, hash_table, nodedict=None, depth=0):

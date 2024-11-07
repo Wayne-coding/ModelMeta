@@ -5,10 +5,6 @@ if device_op.device_option=='cpu':
 elif device_op.device_option=='gpu':
     device='cuda'
 
-
-
-
-
 import torch
 from torch_mutation.rules_torch import rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,\
                                         rule10,rule11,rule12,rule13,rule14,rule15,rule16,rule17,rule18
