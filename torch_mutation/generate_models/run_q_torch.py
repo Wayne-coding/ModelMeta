@@ -9,6 +9,8 @@ import time
 import json
 import torch.fx as fx
 from torch_mutation.MR_structure import *
+from torch_mutation.metrics import MAEDistance
+from torch_mutation.cargo import get_loss
 from torch_mutation.cargo import match_rule,reflect_name,MCMC,compute_gpu_cpu
 from torch_mutation.api_mutation import api_mutation
 from torch_mutation.cargo import select_places,max_seed_model_api_times
@@ -164,6 +166,13 @@ def run_q_torch(seed_model, mutate_times,num_samples):
                 if new_outputs.shape!=original_outputs.shape:
                     sys.exit('new_outputs.shape!=original_outputs.shape!')
 
+                if isinstance(new_outputs, torch.Tensor):
+                    distance = MAEDistance(original_outputs, new_outputs)  
+                    
+                    loss_fun_ms, loss_fun_torch = get_loss('CrossEntropy')
+                    loss_fun_ms, loss_fun_torch = loss_fun_ms(), loss_fun_torch().to(device)
+                    loss_torch = loss_fun_torch(new_outputs, y_outputs)
+
         except Exception as e:
             log_dict[n]['state'] = f"Failed: Error during mutation: {str(e)}"
 
@@ -223,6 +232,7 @@ def run_q_torch(seed_model, mutate_times,num_samples):
             log_dict[n]['subs_place'], log_dict[n]['dep_places'] = subs_place, dep_places
             log_dict[n]['api_mutation_type(seed_model or deadcode)'] = api_mutation_type
             log_dict[n]['select_d_name'] = select_d_name
+            log_dict[n]['loss'] = loss_torch
         
         dict_save_path = os.path.join("results", seed_model, str(localtime),"TORCH_LOG_DICT_" + str(device).replace(':', '_') + ".json")
         os.makedirs(os.path.dirname(dict_save_path), exist_ok=True)
