@@ -83,9 +83,40 @@ if __name__ == '__main__':
     print(nn_types)
 
 
+def loss_unet_ms():
+    from models.UNet.Unet import CrossEntropyWithLogits
+    return CrossEntropyWithLogits()
+
+
+def loss_unet_torch():
+    from models.UNet.main_torch import CrossEntropyWithLogits
+    return CrossEntropyWithLogits()
+
+def loss_textcnn_ms():
+    from models.textcnn.run_textcnn import loss_com_ms
+    return loss_com_ms
+
+
+def loss_textcnn_torch():
+    from models.textcnn.run_textcnn_torch import loss_com
+    return loss_com()
+
+def loss_ssimae_ms():
+    from models.ssimae.src.network import SSIMLoss
+    return SSIMLoss()
+
+
+def loss_ssimae_torch():
+    from models.ssimae.src.network_torch import SSIMLoss as SSIMLoss_torch
+    return SSIMLoss_torch()
+
+
 def get_loss(loss_name):
     loss = {}
-    loss['CrossEntropy'] = [torch.nn.CrossEntropyLoss, torch.nn.CrossEntropyLoss]
+    loss['CrossEntropy'] = [mindspore.nn.CrossEntropyLoss, torch.nn.CrossEntropyLoss]
+    loss['unetloss'] = [loss_unet_ms, loss_unet_torch]
+    loss['textcnnloss'] = [loss_textcnn_ms, loss_textcnn_torch]
+    loss['ssimae'] = [loss_ssimae_ms, loss_ssimae_torch]
     return loss[loss_name]
 
 def max_seed_model_api_times(model_name):

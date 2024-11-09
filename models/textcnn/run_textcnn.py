@@ -150,6 +150,36 @@ def train_eval_TextCNN(model_old, model_mutant, data_dir, batch_size, now_time):
             100 * correct_ms_new / test_data_size)+"\n")
 
 
+def loss_com_ms(logit, label, class_nums):
+    # class_nums=mindspore.Tensor([class_nums],mindspore.int32)
+    exp = ops.Exp()
+    reduce_sum = ops.ReduceSum(keep_dims=True)
+    onehot = ops.OneHot()
+    on_value = ms.Tensor(1.0, mindspore.int32)
+    off_value = ms.Tensor(0.0, mindspore.int32)
+    div = ops.Div()
+    log = ops.Log()
+    sum_cross_entropy = ops.ReduceSum(keep_dims=False)
+    mul = ops.Mul()
+    reduce_mean = ops.ReduceMean(keep_dims=False)
+    reduce_max = ops.ReduceMax(keep_dims=True)
+    sub = ops.Sub()
+
+    logit_max = reduce_max(logit, -1)
+    exp0 = exp(sub(logit, logit_max))
+    exp_sum = reduce_sum(exp0, -1)
+    softmax_result = div(exp0, exp_sum)
+
+    label = onehot(label, class_nums, on_value, off_value)
+    softmax_result_log = log(softmax_result)
+    loss = sum_cross_entropy((mul(softmax_result_log, label)), -1)
+    loss = mul(ops.scalar_to_tensor(-1.0), loss)
+    loss = reduce_mean(loss, -1)
+    return loss
+
+
+
+
 class SoftmaxCrossEntropyExpand(Cell):
     r"""
     Computes softmax cross entropy between logits and labels. Implemented by expanded formula.
