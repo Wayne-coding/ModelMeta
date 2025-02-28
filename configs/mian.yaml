@@ -1,0 +1,3 @@
+config:
+  yaml_path: /home/cvgroup/myz/czx/semtest-gitee/modelmeta/configs/rq3_MRs/vit_False.yaml
+  csv_path: /home/cvgroup/myz/czx/semtest-gitee/modelmeta/rq3_gpu_mrs_dqn/0,1,2,3_vit_False.csv
