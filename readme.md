@@ -55,7 +55,7 @@ Results will be available in the `./mindspore_mutation/results/` ,`./torch_mutat
 
 The parameters for running the mutation tests can be configured in `main_torch.py` , `main_ms.py` or `main_onnx.py`. Below are the adjustable parameters:
 
-- `seed_model`: Name of the model. Options: `resnet`,`UNet`,`vgg16`,`textcnn`.`ssimae`
+- `seed_model`: Name of the model. Options: `resnet`,`UNet`,`vgg16`,`textcnn`,`ssimae`...
 - `mutation_iterations`: Number of mutation iterations.
 - `mutate_times`: Number of epochs for training.
 - `batch_size`: Size of the batches for training.
