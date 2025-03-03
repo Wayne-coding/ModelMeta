@@ -75,6 +75,8 @@ networkx==3.2.1
 nltk==3.8.1
 numpy==1.22.0
 oauthlib==3.2.2
+onnx==1.10.1
+onnxruntime==1.9.0
 opencv-python==4.9.0.80
 opencv-python-headless==4.9.0.80
 openpyxl==3.1.5

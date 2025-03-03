@@ -40,16 +40,20 @@ python main_ms.py
 cd ./torch_mutation
 python main_torch.py
 ```
+```bash
+cd ./onnx_mutation
+python main_onnx.py
+```
 ### Step 2: Check Output
 
-Results will be available in the `./mindspore_mutation/results/` or `./torch_mutation/results/` directory.. This folder will contain two files:
+Results will be available in the `./mindspore_mutation/results/` ,`./torch_mutation/results/` or `./onnx_mutation/results/` directory.. This folder will contain two files:
 - A `.json` file: Contains the log details.
 - A `.xlsx` file: Records the results of the process, including coverage, distance, and other relevant metrics.
 
 
 ## Parameter Settings
 
-The parameters for running the mutation tests can be configured in `main_torch.py` or `main_ms.py`. Below are the adjustable parameters:
+The parameters for running the mutation tests can be configured in `main_torch.py` , `main_ms.py` or `main_onnx.py`. Below are the adjustable parameters:
 
 - `seed_model`: Name of the model. Options: `resnet`,`UNet`,`vgg16`,`textcnn`.`ssimae`
 - `mutation_iterations`: Number of mutation iterations.
