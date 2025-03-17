@@ -53,14 +53,24 @@ Results will be available in the `./mindspore_mutation/results/` ,`./torch_mutat
 
 ## Parameter Settings
 
-The parameters for running the mutation tests can be configured in `main_torch.py` , `main_ms.py` or `main_onnx.py`. Below are the adjustable parameters:
+For specific configuration changes, you can make them in `./config/rq3_exp1.yaml`.Then run `main_torch.py`, `main_ms.py` or `main_onnx.py`
 
-- `seed_model`: Name of the model. Options: `resnet`,`UNet`,`vgg16`,`textcnn`,`ssimae`...
-- `mutation_iterations`: Number of mutation iterations.
-- `mutate_times`: Number of epochs for training.
-- `batch_size`: Size of the batches for training.
+Below are the adjustable parameters:
+```python
+execution_config:
+  seed_model: "resnet" # Options: `resnet`,`UNet`,`vgg16`,`TextCNN`,`ssimae`...
+  mutate_times: 100 # Number of epochs for training.
+  ifeplison: 0.6 # Number of eplison threshold.
+  ifapimut: False # Flag to determine whether to perform API mutation
+  ifTompson: False # Flag to determine whether to perform Tompson mutation
+  num_samples: 1 # Size of the batches for training.
+  run_option: 0  # Mutation strategy. Options: 0:'random', 1:'MCMC', 2:'qrdqn'.
+  MR: 0,1,2,3   # Mutation strategy. Options: 0:'SMR1', 1:'SMR2', 2:'SMR3', 3:'SMR4'.
+  num_quantiles: 20 # QRDQN parameter
+  device: -1 # Choose CPU or GPU
 
-- `mutation_strategy`: Mutation strategy. Options: `'random'`, `'qrdqn'`, `'MCMC'`.
-
-
-
+train_config: 
+  loss_name: "CrossEntropy" # Options: yolov4loss CrossEntropy unetloss textcnnloss ssdmultix yololoss...
+  opt_name: "SGD" # Options: adam SGD ...
+  seed_model: "TextCNN" # Options: `resnet`,`UNet`,`vgg16`,`TextCNN`,`ssimae`...
+```

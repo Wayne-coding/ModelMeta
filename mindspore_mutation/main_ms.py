@@ -64,7 +64,6 @@ if __name__ == '__main__':
 
     # # 设置参数 
     seed_model = execution_config['seed_model'] 
-    # resnet yolov3 yolov4 mobilenetv2 openpose crnn unet DeepLabV3 patchcore SSDresnet50fpn SSDmobilenetv1
     print(seed_model)
     mutate_times = int(execution_config['mutate_times'])  # 变异次数
     ifapimut = execution_config['ifapimut']
